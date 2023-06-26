@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using System.Xml.Linq;
+﻿using MediaOrganize.Models;
 using System.Text.Json;
-using MediaOrganize.Models;
-using System.Reflection.Metadata.Ecma335;
+using System.Web;
 
 namespace MediaOrganize.Service
 {
@@ -25,9 +17,7 @@ namespace MediaOrganize.Service
 
         public async Task<Movie> GetMovie(string search, int year)
         {
-            var nameEncode = HttpUtility.UrlPathEncode(search);
-            var data = await GetAsync<ThemoviedbResult<ThemoviedbResultMovie>>($"search/movie?query={nameEncode}&include_adult=false&language={Language}&page=1&year={year}");
-
+            var data = await GetAsync<ThemoviedbResult<ThemoviedbResultMovie>>("search/movie?query={0}&include_adult=false&language={1}&page=1&year={2}", search, Language, year);
             var find = data?.results?.FirstOrDefault();
             if (find != null)
             {
@@ -37,27 +27,29 @@ namespace MediaOrganize.Service
             }
             return new();
         }
-        
+
         public async Task<Serie> GetSerie(string search, int season)
         {
-            var nameEncode = HttpUtility.UrlPathEncode(search);
-            var data = await GetAsync<ThemoviedbResult<ThemoviedbResultSerie>>($"/search/tv?query={nameEncode}&include_adult=false&language={Language}&page=1");          
-
+            var data = await GetAsync<ThemoviedbResult<ThemoviedbResultSerie>>("/search/tv?query={0}&include_adult=false&language={1}&page=1", search, Language);
             var find = data?.results?.FirstOrDefault();
             if (find != null)
             {
-                var seasonDetail = await GetAsync<ThemoviedbResultSeason>($"/tv/{find.Id}/season/{season}?language={Language}");
-
+                var seasonDetail = await GetAsync<ThemoviedbResultSeason>("/tv/{0}/season/{1}?language={2}", find.Id, season, Language);
                 int.TryParse(seasonDetail?.Date?.Substring(0, 4), out var year);
                 var serie = new Serie { Title = find?.Title, Year = year, Season = season };
                 return serie;
             }
-            return new();        
+            return new();
         }
 
-        private async Task<T> GetAsync<T>(string url) where T : class, new()
+        private async Task<T> GetAsync<T>(string url, params object[] args) where T : class, new()
         {
             HttpClient client = new HttpClient();
+            for (int i = 0; i < args.Length; i++)
+            {
+                args[i] = HttpUtility.UrlPathEncode($"{args[i]}");
+            }
+            url = string.Format(url, args);
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
             client.DefaultRequestHeaders.Add("accept", "application/json");
             var result = await client.GetAsync($"https://api.themoviedb.org/3/{url}");
