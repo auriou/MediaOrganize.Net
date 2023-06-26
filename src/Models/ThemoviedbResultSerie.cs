@@ -16,4 +16,10 @@ namespace MediaOrganize.Models
         [JsonPropertyName("first_air_date")]
         public string? Date { get; set; }
     }
+
+    public class ThemoviedbResultSeason
+    {
+        [JsonPropertyName("air_date")]
+        public string? Date { get; set; }
+    }
 }

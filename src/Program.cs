@@ -14,7 +14,7 @@ var filterSerie = "(?<name>.*)[\\.-_]S(?<season>\\d+)\\s*E(?<episode>\\d+)";
 
 var dbSearch = new ThemoviedbSearch("fr-FR", Environment.GetEnvironmentVariable("token"));
 
-var res = await dbSearch.GetSerie("From", 1);
+var res = await dbSearch.GetSerie("From", 2);
 
 var res2 = await dbSearch.GetMovie("Avatar: la voie de l'eau", 2022);
 
