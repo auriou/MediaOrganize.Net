@@ -3,6 +3,7 @@ using MediaOrganize.Service;
 using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Xml.Linq;
 
 Console.WriteLine("Hello, World!");
 
@@ -13,7 +14,11 @@ var filterSerie = "(?<name>.*)[\\.-_]S(?<season>\\d+)\\s*E(?<episode>\\d+)";
 
 var dbSearch = new ThemoviedbSearch("fr-FR", Environment.GetEnvironmentVariable("token"));
 
-if(!Directory.Exists(filePath))
+var res = await dbSearch.GetSerie("From", 1);
+
+var res2 = await dbSearch.GetMovie("Avatar: la voie de l'eau", 2022);
+
+if (!Directory.Exists(filePath))
 {
     Console.WriteLine("media path not exist !");
     return;
@@ -39,7 +44,7 @@ foreach(var file in Directory.GetFiles(filePath))
             var google = new GoogleSearch();
             var id = await google.GetTitleId(name);
 
-            var res = await dbSearch.GetSerie(name);
+            var res3 = await dbSearch.GetSerie(name, season);
 
 
             //ttps://api.themoviedb.org/3/find/9813792?external_source=imdb_id&language=fr

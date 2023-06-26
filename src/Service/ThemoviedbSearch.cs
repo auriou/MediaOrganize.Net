@@ -22,24 +22,39 @@ namespace MediaOrganize.Service
             Token = token;
         }
 
-        public async Task<ThemoviedbResult<ThemoviedbResultMovie>> GetMovie(string search, int year)
+        public async Task<Movie> GetMovie(string search, int year)
         {
             var nameEncode = HttpUtility.UrlPathEncode(search);
             using HttpClient client = GetHttpClient();
             var result = await client.GetAsync($"https://api.themoviedb.org/3/search/movie?query={nameEncode}&include_adult=false&language={Language}&page=1&year={year}");
             var stream = await result.Content.ReadAsStreamAsync();
             var data = await JsonSerializer.DeserializeAsync<ThemoviedbResult<ThemoviedbResultMovie>>(stream);
-            return data ?? new();
+            var find = data?.results?.FirstOrDefault();
+            if (find != null)
+            {
+                int.TryParse(find?.Date?.Substring(0, 4), out var yearMovie);
+                var movie = new Movie { Title = find?.Title, Year = yearMovie };
+                return movie;
+            }
+            return new();
         }
         
-        public async Task<ThemoviedbResult<ThemoviedbResultSerie>> GetSerie(string search)
+        public async Task<Serie> GetSerie(string search, int season)
         {
             var nameEncode = HttpUtility.UrlPathEncode(search);
             using HttpClient client = GetHttpClient();
             var result = await client.GetAsync($"https://api.themoviedb.org/3/search/tv?query={nameEncode}&include_adult=false&language={Language}&page=1");
             var stream = await result.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<ThemoviedbResult<ThemoviedbResultSerie>>(stream);
-            return data ?? new();
+
+            var find = data?.results?.FirstOrDefault();
+            if (find != null)
+            {
+                int.TryParse(find?.Date?.Substring(0, 4), out var year);
+                var serie = new Serie { Title = find?.Title, Year = year, Season = season };
+                return serie;
+            }
+            return new();        
         }
 
         private HttpClient GetHttpClient()

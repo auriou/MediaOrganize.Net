@@ -2,10 +2,8 @@
 {
     public class Serie
     {
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public int Year { get; set; }
         public int Season { get; set; }
     }
-
-
 }
