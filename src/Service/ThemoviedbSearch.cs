@@ -15,7 +15,7 @@ namespace MediaOrganize.Service
             Token = token;
         }
 
-        public async Task<Movie> GetMovie(string search, int year)
+        public async Task<Movie> GetMovieAsync(string search, int year)
         {
             var data = await GetAsync<ThemoviedbResult<ThemoviedbResultMovie>>("search/movie?query={0}&include_adult=false&language={1}&page=1&year={2}", search, Language, year);
             var find = data?.results?.FirstOrDefault();
@@ -28,7 +28,7 @@ namespace MediaOrganize.Service
             return new();
         }
 
-        public async Task<Serie> GetSerie(string search, int season)
+        public async Task<Serie> GetSerieAsync(string search, int season)
         {
             var data = await GetAsync<ThemoviedbResult<ThemoviedbResultSerie>>("/search/tv?query={0}&include_adult=false&language={1}&page=1", search, Language);
             var find = data?.results?.FirstOrDefault();
