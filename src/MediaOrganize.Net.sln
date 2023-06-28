@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaOrganize.Net", "MediaOrganize.Net.csproj", "{B12FC472-4C83-4932-8A55-04DF44D8C97D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaOrganize.Net", "MediaOrganize.Net.csproj", "{B12FC472-4C83-4932-8A55-04DF44D8C97D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaOrganize.Service", "..\MediaOrganize.Service\MediaOrganize.Service.csproj", "{1886B28B-7E5F-4439-B5CC-269296A9EDE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaOrganize.Test", "..\MediaOrganize.Test\MediaOrganize.Test.csproj", "{49E09E80-C37F-4A05-B56D-DB30D29C9079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B12FC472-4C83-4932-8A55-04DF44D8C97D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B12FC472-4C83-4932-8A55-04DF44D8C97D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B12FC472-4C83-4932-8A55-04DF44D8C97D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1886B28B-7E5F-4439-B5CC-269296A9EDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1886B28B-7E5F-4439-B5CC-269296A9EDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1886B28B-7E5F-4439-B5CC-269296A9EDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1886B28B-7E5F-4439-B5CC-269296A9EDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E09E80-C37F-4A05-B56D-DB30D29C9079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E09E80-C37F-4A05-B56D-DB30D29C9079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E09E80-C37F-4A05-B56D-DB30D29C9079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E09E80-C37F-4A05-B56D-DB30D29C9079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
