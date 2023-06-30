@@ -1,18 +1,17 @@
-﻿using MediaOrganize.Service.Workers;
+﻿using MediaOrganize.Models;
+using MediaOrganize.Service.Workers;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 await Host.CreateDefaultBuilder(args)
     .ConfigureAppConfiguration((context, configuration) =>
     {
-        //context.InitAppsettings(configuration);
+        configuration.AddJsonFile("appsettings.json");
     })
     .ConfigureServices((hostContext, services) =>
     {
-        //services.AddHostedService<WorkerHostedService>(service =>
-        //{
-        //    return new WorkerHostedService(args);
-        //});
+        services.Configure<Config>(hostContext.Configuration);
         services.AddHostedService<WorkerHostedService>();
     })
-    .RunConsoleAsync();
+    .StartAsync();

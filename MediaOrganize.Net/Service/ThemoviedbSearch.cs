@@ -4,7 +4,7 @@ using System.Web;
 
 namespace MediaOrganize.Service
 {
-    internal class ThemoviedbSearch
+    public class ThemoviedbSearch
     {
         public string Language { get; }
         public string Token { get; }

@@ -2,7 +2,7 @@
 
 namespace MediaOrganize.Service
 {
-    internal class DirectoryScan
+    public class DirectoryScan
     {
         private readonly ThemoviedbSearch _tmdbSearch;
         private readonly string _mediaDirectory;

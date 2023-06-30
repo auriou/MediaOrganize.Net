@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MediaOrganize.Net.csproj" />
+	  <ProjectReference Include="..\MediaOrganize.Net\MediaOrganize.Net.csproj" />
   </ItemGroup>
 
 </Project>
