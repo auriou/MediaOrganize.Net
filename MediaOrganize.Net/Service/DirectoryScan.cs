@@ -8,13 +8,16 @@ namespace MediaOrganize.Service
         private readonly string _mediaDirectory;
         private readonly string _movieDirectory;
         private readonly string _serieDirectory;
+        private readonly string _filterMedia;
 
-        const string _filterMedia = ".*\\.(mkv|mp4)$";
         const string _filterSerie = "(?<name>.*)[\\.-_]S(?<season>\\d+)\\s*E(?<episode>\\d+)";
         const string _filterMovie = "(?<name>.*)(?<date>\\d{4})\\..*";
 
-        public DirectoryScan(ThemoviedbSearch tmdbSearch, string mediaDirectory, string movieDirectory, string serieDirectory)
+        public DirectoryScan(ThemoviedbSearch tmdbSearch, 
+            string mediaDirectory, string movieDirectory, 
+            string serieDirectory, string scanFilter = "mkv|mp4|avi")
         {
+            _filterMedia = $".*\\.({scanFilter})$";
             _tmdbSearch = tmdbSearch;
             _mediaDirectory = mediaDirectory;
             _movieDirectory = movieDirectory;

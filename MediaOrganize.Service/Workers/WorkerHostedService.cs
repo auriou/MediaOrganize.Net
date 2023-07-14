@@ -23,7 +23,7 @@ namespace MediaOrganize.Service.Workers
 
             var directoryScan = new DirectoryScan(
                 dbSearch, _config.ScanPath, 
-                _config.MoviePath, _config.SeriePath);
+                _config.MoviePath, _config.SeriePath, _config.ScanFilter);
 
             await directoryScan.ScanAsync();
         }
