@@ -53,7 +53,12 @@ namespace MediaOrganize.Service
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {Token}");
             client.DefaultRequestHeaders.Add("accept", "application/json");
             var result = await client.GetAsync($"https://api.themoviedb.org/3/{url}");
+            
             var stream = await result.Content.ReadAsStringAsync();
+            if (!result.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"error : {result.ReasonPhrase} {stream}");
+            }
             var data = JsonSerializer.Deserialize<T>(stream);
             return data ?? new();
         }

@@ -2,11 +2,21 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AssemblyName>mediaorganize</AssemblyName>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="appsettings.Sample.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="appsettings.Sample.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
