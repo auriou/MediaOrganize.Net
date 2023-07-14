@@ -69,7 +69,7 @@ namespace MediaOrganize.Service
                             {
                                 Directory.CreateDirectory(directorySerie);
                             }
-                            File.Copy(file, Path.Combine(directorySerie, filename), true);
+                            File.Move(file, Path.Combine(directorySerie, filename), true);
                         }
                     }
                     else // movies
@@ -87,7 +87,7 @@ namespace MediaOrganize.Service
                                 var nameMovie = Normalize(movie.Title);
                                 var filename = $"{nameMovie}{(movie.Year > 0 ? $" ({movie.Year})" : string.Empty)}" + Path.GetExtension(file);
 
-                                File.Copy(file, Path.Combine(_movieDirectory, filename), true);
+                                File.Move(file, Path.Combine(_movieDirectory, filename), true);
                             }
                         }
                     }
